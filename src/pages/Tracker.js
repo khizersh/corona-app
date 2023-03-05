@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import Slider from "../component/Slider";
 import TreatmentList from "../component/TreatmentList";
-import { Data } from "../service/utility";
+import { BASE_URL, Data } from "../service/utility";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 
@@ -14,54 +14,73 @@ const Tracker = () => {
   const [end, setEnd] = useState(false);
 
   const [list, setList] = useState([]);
+  const [currentList, setCurrentList] = useState([]);
 
-  useEffect(() => {
-    console.log("currentQuestion : ", currentQuestion);
-  }, [currentQuestion]);
+  useEffect(() => {}, [currentQuestion]);
 
   const onClickAnswer = (btn) => {
     setAction(btn.action);
+    setCurrentList(btn.list);
   };
-  const onClickSubmit = (selectedOption) => {
+  const onClickSubmit = async (selectedOption) => {
     // console.log("option : ", selectedOption, action);
     let userString = localStorage.getItem("user");
     let user = null;
     if (userString != null) {
       user = JSON.parse(userString);
     }
-    //   {
-    //     "email": "",
-    //     "date": "05-03-2023",
-    //     "infoList": [
-    //         {
-    //             "question": "",
-    //             "answer": "",
-    //             "treatment": ""
-    //         }
-    //     ]
-    // }
     if (user != null) {
       let request = {
         email: user.email,
         date: moment(new Date()).format("DD-MM-YYYY"),
-        infoList : {}
+        infoList: [
+          {
+            question: currentQuestion.question,
+            answer: selectedOption,
+            treatment: currentList,
+          },
+        ],
       };
-      console.log("request : ",request);
-      // if (action != "end") {
-      //   setCurrentQuestion(Data[action]);
-      //   let option = Data[action].options.find(
-      //     (opt) => opt.option == selectedOption
-      //   );
-      //   if (option?.list?.length) {
-      //     let oldList = list;
-      //     option.list.forEach((element) => {
-      //       oldList.push(element);
-      //     });
-      //     setList(oldList);
-      //   }
-      // } else {
-      //   setEnd(true);
-      // }
+
+      const response = await fetch(BASE_URL + "/info/save", {
+        method: "POST",
+        body: JSON.stringify(request),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      const data = await response.json();
+
+      if (data && data.status == "0000") {
+      } else if (data && data.status == "9999") {
+        swal("Error!", data.message, "error");
+      } else {
+        swal("Error!", "Something went wrong!", "error");
+      }
+      if (action != "end") {
+        setCurrentQuestion(Data[action]);
+        let option = Data[action].options.find(
+          (opt) => opt.option == selectedOption
+        );
+        if (currentList?.length) {
+          let oldList = list;
+          currentList.forEach((element) => {
+            oldList.push(element);
+          });
+          console.log("oldList after : ", oldList);
+          setList(oldList);
+        }
+        // if (option?.list?.length) {
+        //   let oldList = list;
+        //   option.list.forEach((element) => {
+        //     oldList.push(element);
+        //   });
+        //   setList(oldList);
+        // }
+      } else {
+        setEnd(true);
+      }
     } else {
       swal("Error!", "Please login first!", "error").then((r) =>
         router.push("/signin")

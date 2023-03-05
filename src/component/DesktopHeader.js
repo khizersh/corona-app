@@ -14,7 +14,7 @@ const DesktopHeader = () => {
               <Link to={"/tracker"} className="text-decoration-none font-17">Symptoms tracker</Link>
             </div>
             <div className="col-2 text-center">
-              <Link to={"/"} className="text-decoration-none font-17">my dashboard</Link>
+              <a href={"/dashboard/admin/my-calender"} className="text-decoration-none font-17">my dashboard</a>
             </div>
             <div className="col-2 text-center">
               <Link to={"/"} className="text-decoration-none font-17">who are we?</Link>

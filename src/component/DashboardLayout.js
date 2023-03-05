@@ -100,81 +100,61 @@ export const DashboardLayout = (props) => {
   };
 
   function getList() {
-    return [
-      {
-        key: "user",
-        url: "/dashboard/admin/user",
-        name: "User List",
-        icon: "fa fa-user",
-        active: true,
-        hr: false,
-      },
-      // {
-      //   key: "stock-finder",
-      //   url: "/dashboard/stock-finder",
-      //   name: "Stock Finder",
-      //   icon: "fa fa-pie-chart",
-      //   active: false,
-      //   hr: false,
-      // },
-      // {
-      //   key: "halal-etf",
-      //   url: "/dashboard/halal-etf",
-      //   name: "Halal ETFS",
-      //   icon: "fa fa-pie-chart",
-      //   active: false,
-      //   hr: false,
-      // },
-      // {
-      //   key: "budgeting-tool",
-      //   url: "/dashboard/budgeting-tool",
-      //   name: "Budgeting Tool",
-      //   icon: "fa fa-calculator",
-      //   active: false,
-      //   hr: false,
-      // },
-      // {
-      //   key: "watchlist",
-      //   url: "/dashboard/watchlist",
-      //   name: "Watchlist",
-      //   icon: "fa fa-money",
-      //   active: false,
-      //   hr: false,
-      // },
-      // {
-      //   key: "feedback",
-      //   url: "/dashboard/feedback",
-      //   name: "Feedback",
-      //   icon: "fa fa-commenting",
-      //   active: false,
-      //   hr: true,
-      // },
-      // // {
-      // //   key: "settings",
-      // //   url: "/dashboard/settings",
-      // //   name: "Settings",
-      // //   icon: "fa fa-cog",
-      // //   active: false,
-      // //   hr: true,
-      // // },
-      // {
-      //   key: "subscription",
-      //   url: "/dashboard/subscription",
-      //   name: "Subscription",
-      //   icon: "fa fa-users",
-      //   active: false,
-      //   hr: false,
-      // },
-      {
-        key: "logout",
-        url: "/dashboard/logout",
-        name: "Logout",
-        icon: "fa fa-sign-out",
-        active: false,
-        hr: false,
-        onClick: logout,
-      },
-    ];
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      if (user.role == "admin") {
+        return [
+          {
+            key: "user",
+            url: "/dashboard/admin/user",
+            name: "User List",
+            icon: "fa fa-user",
+            active: true,
+            hr: false,
+          },
+          {
+            key: "my-calender",
+            url: "/dashboard/admin/my-calender",
+            name: "User Calender",
+            icon: "fa fa-user",
+            active: true,
+            hr: false,
+          },
+          {
+            key: "logout",
+            url: "/dashboard/logout",
+            name: "Logout",
+            icon: "fa fa-sign-out",
+            active: false,
+            hr: false,
+            onClick: logout,
+          },
+        ];
+      } else {
+        return [
+          {
+            key: "my-calender",
+            url: "/dashboard/admin/my-calender",
+            name: "User Calender",
+            icon: "fa fa-user",
+            active: true,
+            hr: false,
+          },
+          {
+            key: "logout",
+            url: "/dashboard/logout",
+            name: "Logout",
+            icon: "fa fa-sign-out",
+            active: false,
+            hr: false,
+            onClick: logout,
+          },
+        ];
+      }
+    }
+    else{
+      return []
+    }
   }
 
   function onClick(sidebar) {
@@ -200,7 +180,8 @@ export const DashboardLayout = (props) => {
     if (user) {
       localStorage.removeItem("user");
       swal("Success!", "Logout successfully!", "success").then((m) => {
-        router.push("/");
+        window.location.replace("/")
+        // router.push("/");
       });
     }
   }
@@ -220,23 +201,18 @@ export const DashboardLayout = (props) => {
 
   useEffect(() => {
     let user = localStorage.getItem("user");
-    setSidebar(getList());
+
     if (user) {
       let userData = JSON.parse(user);
       if (userData.email) {
-        setUserName(userData.name);
-        // ============== Watch List Condition
-        // if (userData.freeUser) {
-        //   setSidebar(getList().filter((side) => side.key != "watchlist"));
-        // } else {
-        //   setSidebar(getList());
-        // }
         setSidebar(getList());
       } else {
+        window.location.replace("/")
         // router.push("/signin");
       }
     } else {
-      //   router.push("/signin");
+      window.location.replace("/")
+      // router.push("/signin");
     }
     setPage(getPageNameByKey(selected));
   }, [selected]);
@@ -288,7 +264,7 @@ export const DashboardLayout = (props) => {
                   </p>
                 </div>
                 <div className="col-8 col-lg-8 text-right ">
-                  <div className="float-right" >
+                  <div className="float-right">
                     <i className="fa fa-user"></i> Logout
                   </div>
                 </div>
@@ -326,7 +302,10 @@ export const DashboardLayout = (props) => {
                 sidebar.map((side, ind) => {
                   return (
                     <>
-                      <Link className="text-black text-decoration-none" to={side.url}>
+                      <Link
+                        className="text-black text-decoration-none"
+                        to={side.url}
+                      >
                         <div
                           onClick={() => onClick(side)}
                           className={`list-group-item list-group-item-action py-2 ripple ${
