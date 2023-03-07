@@ -13,27 +13,45 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import UserList from "./pages/dashboard/UserList";
 import CustomCalender from "./pages/dashboard/CustomCalender";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // import "./assets/css/"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <Switch>
-      
-      <Layout>
-        <Route path="/" exact render={(props) => <Home {...props} />} />
-        <Route
-          path="/tracker"
-          exact
-          render={(props) => <Tracker {...props} />}
-        />
-        <Route path="/signup" exact render={(props) => <Signup {...props} />} />
-        <Route path="/signin" exact render={(props) => <Signin {...props} />} />
-        <Route path="/dashboard/admin/user" exact render={(props) => <UserList {...props} />} />
-        <Route path="/dashboard/admin/my-calender" exact render={(props) => <CustomCalender {...props} />} />
-      </Layout>
-    </Switch>
-  </BrowserRouter>
+  <GoogleOAuthProvider clientId="242626251664-pg5lmetaaaqreh3pddstjs3q1239nqnp.apps.googleusercontent.com">
+    <BrowserRouter>
+      <Switch>
+        <Layout>
+          <Route path="/" exact render={(props) => <Home {...props} />} />
+          <Route
+            path="/tracker"
+            exact
+            render={(props) => <Tracker {...props} />}
+          />
+          <Route
+            path="/signup"
+            exact
+            render={(props) => <Signup {...props} />}
+          />
+          <Route
+            path="/signin"
+            exact
+            render={(props) => <Signin {...props} />}
+          />
+          <Route
+            path="/dashboard/admin/user"
+            exact
+            render={(props) => <UserList {...props} />}
+          />
+          <Route
+            path="/dashboard/admin/my-calender"
+            exact
+            render={(props) => <CustomCalender {...props} />}
+          />
+        </Layout>
+      </Switch>
+    </BrowserRouter>
+  </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

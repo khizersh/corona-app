@@ -1,5 +1,6 @@
 // export var BASE_URL = "https://myrizq-backend.onrender.com";
 export var BASE_URL = "http://localhost:3001";
+export var GOOGLE_CLIENT_ID = "242626251664-pg5lmetaaaqreh3pddstjs3q1239nqnp.apps.googleusercontent.com";
 
 export var Data = {
   1: {

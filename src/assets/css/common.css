@@ -12,6 +12,10 @@ li {
   color: white;
 }
 
+.cursor-pointer:hover{
+  cursor: pointer;
+}
+
 .min-height{
   margin-top: 50px;
   padding-bottom: 100px;

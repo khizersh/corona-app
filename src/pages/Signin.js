@@ -3,6 +3,8 @@ import "../assets/css/login.css";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import { BASE_URL } from "../service/utility";
+import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
 
 const Signin = () => {
   const router = useHistory();
@@ -39,6 +41,38 @@ const Signin = () => {
       }
     } catch (error) {}
   };
+
+  const onSuccesGoogle = async (rep) => {
+    const info = jwtDecode(rep.credential);
+
+    let request = {
+      email: info.email,
+      firstName: info.given_name,
+      lastName: info.family_name,
+      role: "public",
+    };
+
+    const response = await fetch(BASE_URL + "/user/signin", {
+      method: "POST",
+      body: JSON.stringify(request),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data && data.status == "0000") {
+      localStorage.setItem("user", JSON.stringify(data.data));
+      swal("Success!", "User signin successfully!", "success").then((m) => {
+        router.push("/");
+      });
+    } else if (data && data.status == "9999") {
+      swal("Error!", data.message, "error");
+    } else {
+      swal("Error!", "Something went wrong!", "error");
+    }
+  };
   return (
     <div className="container margin-top-100">
       <div className="row">
@@ -49,14 +83,22 @@ const Signin = () => {
             src={require("../assets/img/account.png")}
           />
           <div className="mt-3">
-            <button className="bg-green w-50">
-              <img
-                alt="Building"
-                className=""
-                width={"23px"}
-                src={require("../assets/img/google.png")}
-              />{" "}
-              <text>sign up with Google</text>
+            <button className="purple-bg none-border">
+              {/* <img
+                  alt="Building"
+                  className=""
+                  width={"23px"}
+                  src={require("../assets/img/google.png")}
+                />{" "}
+                <text>sign up with Google</text> */}
+              <GoogleLogin
+                className="bg-green"
+                text="Sign in with Google"
+                onSuccess={(data) => onSuccesGoogle(data)}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              ></GoogleLogin>
             </button>
           </div>
           <div className="text-center ">
