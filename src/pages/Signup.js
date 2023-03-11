@@ -66,9 +66,9 @@ const Signup = () => {
 
     if (data && data.status == "0000") {
       localStorage.setItem("user", JSON.stringify(data.data));
-        swal("Success!", "User registered successfully!", "success").then((m) => {
-          router.push("/");
-        });
+      swal("Success!", "User registered successfully!", "success").then((m) => {
+        router.push("/");
+      });
     } else if (data && data.status == "9999") {
       swal("Error!", data.message, "error");
     } else {
@@ -77,7 +77,16 @@ const Signup = () => {
   };
 
   const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name == "firstName" || name == "lastName") {
+      var letters = /^[A-Za-z]+$/;
+      if (value.match(letters)) {
+        setUser({ ...user, [e.target.name]: e.target.value });
+      }
+    } else {
+      setUser({ ...user, [e.target.name]: e.target.value });
+    }
   };
 
   const onClick = async () => {
@@ -158,6 +167,7 @@ const Signup = () => {
                 <input
                   type={"text"}
                   name="firstName"
+                  value={user.firstName}
                   onChange={(e) => onChange(e)}
                   className="form-control"
                 />
@@ -168,6 +178,7 @@ const Signup = () => {
                   type={"text"}
                   className="form-control"
                   name="lastName"
+                  value={user.lastName}
                   onChange={(e) => onChange(e)}
                 />
               </div>
@@ -177,6 +188,7 @@ const Signup = () => {
                   type={"email"}
                   className="form-control"
                   name="email"
+                  value={user.email}
                   onChange={(e) => onChange(e)}
                 />
               </div>
@@ -186,6 +198,7 @@ const Signup = () => {
                   type={"password"}
                   className="form-control"
                   name="password"
+                  value={user.password}
                   onChange={(e) => onChange(e)}
                 />
               </div>

@@ -70,9 +70,9 @@ const CustomCalender = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12 w-100">
+        <div className="col-12 w-100 text-center ">
           <Calendar
-            className={"mx-auto"}
+            className={"mx-auto shadow"}
             onChange={(e) => onChangeDate(e)}
             value={value}
             tileClassName={({ date, view }) => {

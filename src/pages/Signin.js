@@ -14,6 +14,8 @@ const Signin = () => {
   });
 
   const onChange = (e) => {
+    let value = e.target.value;
+    
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
