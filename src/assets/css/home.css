@@ -1,13 +1,14 @@
 .steps-list {
   list-style: none;
   font-size: 30px;
+  width: 75%;
+  display: inline-block;
 }
 
 .mask-img {
   width: 250px !important;
-  position: absolute;
-  top: 137%;
-  left: 65%;
+  position: relative;
+  bottom: 50%;
 }
 
 
@@ -34,4 +35,14 @@
 
 .padding-top {
   padding-top: 100px;
+}
+
+
+@media only screen and (max-width: 1500px) {
+  .mask-img {
+    width: 250px;
+    position: static;
+   
+}
+
 }

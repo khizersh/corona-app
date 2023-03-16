@@ -5,3 +5,11 @@
 .none-border{
     border: none;
 }
+
+.pwd-strong {
+    width: 400px;
+    margin: auto;
+  }
+  .progress-bar {
+    border-radius: 5px;
+  }

@@ -5,15 +5,15 @@ const Home = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-12 col-lg-6 px-5 pt-5 ">
-          <h1 className="font-96">
+        <div className="col-12 col-lg-6 px-5 pt-5 text-left">
+          <h1 className="font-96 font-mbl">
             Your health <br /> in your <br /> hands
           </h1>
         </div>
-        <div className="col-12 col-lg-6 ">
+        <div className="col-12 col-lg-6 text-right">
           <img
             alt="Building"
-            className="image-building"
+            className="image-building "
             src={require("../assets/img/building.png")}
           />
         </div>
@@ -26,14 +26,14 @@ const Home = () => {
             src={require("../assets/img/two-meter.png")}
           />
         </div>
-        <div className="col-12 col-lg-6 font-96">
+        <div className="col-12 col-lg-6 font-96 m-text-center m-mt-5">
           <h1 className="font-75 text-green">Have Symptoms?</h1>
           <h1 className="font-75">Stay Home</h1>
           <h1 className="font-75 text-green">Save Lives</h1>
         </div>
       </div>
-      <div className="row  list-div">
-        <div className="col-12  px-5 ">
+      <div className="row  list-div m-text-center">
+        <div className="col-12  d-px-5 ">
           <ul className="steps-list">
             <li className="text-green">How To Use Our Service?</li>
             <li>Step 1: Sign Up and Make an account</li>
@@ -46,14 +46,20 @@ const Home = () => {
               symptoms on each day{" "}
             </li>
           </ul>
+          <img
+            alt="Building"
+            className="mask-img"
+            src={require("../assets/img/mask.png")}
+          />
         </div>
-        <img
+        <div className=""></div>
+        {/* <img
           alt="Building"
           className="mask-img"
           src={require("../assets/img/mask.png")}
-        />
+        /> */}
       </div>
-      <div className="row margin-top-100" >
+      <div className="row margin-top-100">
         <div className="col-12 col-lg-6 font-96 text-center">
           <img
             alt="Building"

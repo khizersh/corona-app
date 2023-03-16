@@ -18,6 +18,7 @@ const Signup = () => {
     password: "",
     role: "public",
   });
+  const [passwordCount, setPasswordCount] = useState(0);
 
   const responseGoogle = (response) => {
     if (response["error"]) {
@@ -63,6 +64,7 @@ const Signup = () => {
     });
 
     const data = await response.json();
+    console.log("data : ", data);
 
     if (data && data.status == "0000") {
       localStorage.setItem("user", JSON.stringify(data.data));
@@ -91,6 +93,8 @@ const Signup = () => {
 
   const onClick = async () => {
     try {
+      console.log("asfasfa");
+      if(passwordCount > 1){
       const response = await fetch(BASE_URL + "/user/signup", {
         method: "POST",
         body: JSON.stringify(user),
@@ -110,8 +114,62 @@ const Signup = () => {
       } else {
         swal("Error!", "Something went wrong!", "error");
       }
+    }else{
+      swal("Warning!", "Password is not secure!", "warning");
+    }
     } catch (error) {}
   };
+
+  function isGood(password) {
+    var password_strength = document.getElementById("password-text");
+    setUser({ ...user, password: password });
+
+    if (password.length == 0) {
+      password_strength.innerHTML = "";
+      return;
+    }
+
+
+    var regex = new Array();
+    regex.push("[A-Z]"); //Uppercase Alphabet.
+    regex.push("[a-z]"); //Lowercase Alphabet.
+    regex.push("[0-9]"); //Digit.
+    regex.push("[$@$!%*`#?&]"); //Special Character.
+
+    var passed = 0;
+
+    for (var i = 0; i < regex.length; i++) {
+      if (new RegExp(regex[i]).test(password)) {
+        passed++;
+      }
+    }
+
+    var strength = "";
+    switch (passed) {
+      case 0:
+        setPasswordCount(2);
+        break;
+      case 1:
+        setPasswordCount(1);
+        break;
+      case 2:
+        setPasswordCount(2);
+        strength =
+          "<small class='progress-bar bg-danger text-white' style='width: 40%'>Weak</small>";
+        break;
+      case 3:
+        setPasswordCount(3);
+        strength =
+          "<small class='progress-bar bg-warning text-white' style='width: 60%'>Medium</small>";
+        break;
+      case 4:
+        setPasswordCount(4);
+        strength =
+          "<small class='progress-bar bg-success text-white' style='width: 100%'>Strong</small>";
+        break;
+    }
+    password_strength.innerHTML = strength;
+  }
   return (
     <div className="container margin-top-100">
       <div className="row">
@@ -195,13 +253,24 @@ const Signup = () => {
               <div className="form-group mt-4">
                 <text className="text-black weight-600">password: </text>
                 <input
-                  type={"password"}
-                  className="form-control"
-                  name="password"
+                  id="password"
+                  type="password"
                   value={user.password}
-                  onChange={(e) => onChange(e)}
+                  name="password"
+                  className="form-control"
+                  onChange={(e) => isGood(e.target.value)}
                 />
+                <small class="help-block" id="password-text"></small>
               </div>
+              <div>
+                <ul>
+                  <li>Uppercase Letters</li>
+                  <li>Lowercase Letters</li>
+                  <li>Numbers</li>
+                  <li>Special Character</li>
+                </ul>
+              </div>
+
               <div className="text-left mt-5">
                 <button className="btn btn-danger w-50" onClick={onClick}>
                   Sign up
