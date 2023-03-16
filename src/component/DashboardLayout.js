@@ -277,7 +277,7 @@ export const DashboardLayout = (props) => {
           id="sidebarMenu"
           className={`collapse ${
             isClose ? "d-none" : "d-block"
-          } d-lg-block sidebar collapse bg-white`}
+          } d-lg-block sidebar collapse  bg-sidebar`}
         >
           <div className="position-sticky">
             <div className="list-group list-group-flush  mt-2">

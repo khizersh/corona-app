@@ -1,3 +1,12 @@
 .margin-left-edit{
     margin-left: 10px;
 }
+
+.bg-sidebar{
+    background-image: url("/src/assets/img/sidebar.jpg");
+    background-repeat: no-repeat;
+    /* height: 1090px;
+    width: 100%; */
+    /* background-position: right top; */
+    /* background-size: 64%; */
+}

@@ -5,8 +5,18 @@ import "react-calendar/dist/Calendar.css";
 import swal from "sweetalert";
 import "../../assets/css/calender.css";
 import { BASE_URL } from "../../service/utility";
+import 'react-accessible-accordion/dist/fancy-example.css';
+import { useHistory } from "react-router-dom";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
 
 const CustomCalender = () => {
+  const router = useHistory();
   const [value, onChange] = useState(new Date());
   const [dateList, setDateList] = useState([]);
   const mark = ["01-02-2023", "02-02-2023", "03-02-2023"];
@@ -14,12 +24,17 @@ const CustomCalender = () => {
 
   const onChangeDate = (data) => {
     let date = moment(data).format("DD-MM-YYYY");
-    setInformation([])
+    setInformation([]);
     fetchData(date);
   };
 
   useEffect(() => {
-    fetchByEmail();
+    let email = localStorage.getItem("user");
+    if (email) {
+      fetchByEmail();
+    } else {
+      router.push("/");
+    }
   }, []);
 
   const fetchByEmail = async () => {
@@ -68,8 +83,13 @@ const CustomCalender = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container bg-calender">
       <div className="row">
+        <div className="col-12">
+          <p className="text-black">Note : <i>Red Outline Day denoted your saved data</i></p>
+        </div>
+      </div>
+      <div className="row ">
         <div className="col-12 w-100 text-center ">
           <Calendar
             className={"mx-auto shadow"}
@@ -89,21 +109,44 @@ const CustomCalender = () => {
             <h1 className="text-black">User data</h1>
           </div>
           <div className="card-body">
-            {information.length ? (
-              information.map((info) => (
-                <div>
-                  <h3 className="text-black font-outfit text-left font-25">{info.question}</h3>
-                  <p className="text-danger font-outfit text-left weight-700">{info.answer}</p>
-                  <ul>
-                    {info.treatment.map((m) => (
-                      <li className="text-green font-outfit text-left">{m}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            ) : (
-              <></>
-            )}
+            <Accordion allowMultipleExpanded={true}>
+              {information.length ? (
+                information.map((info) => (
+                  // <div>
+                  //   <h3 className="text-black font-outfit text-left font-25">
+                  //     {info.question}
+                  //   </h3>
+                  //   <p className="text-danger font-outfit text-left weight-700">
+                  //     {info.answer}
+                  //   </p>
+                  //   <ul>
+                  //     {info.treatment.map((m) => (
+                  //       <li className="text-green font-outfit text-left">{m}</li>
+                  //     ))}
+                  //   </ul>
+                  // </div>
+                  <AccordionItem>
+                    <AccordionItemHeading>
+                      <AccordionItemButton>{info.question}</AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>
+                      <p className="text-danger font-outfit text-left weight-700">
+                        {info.answer}
+                      </p>
+                      <ul>
+                        {info.treatment.map((m) => (
+                          <li className="text-green font-outfit text-left">
+                            {m}
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionItemPanel>
+                  </AccordionItem>
+                ))
+              ) : (
+                <></>
+              )}
+            </Accordion>
           </div>
         </div>
       </div>
