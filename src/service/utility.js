@@ -4,7 +4,7 @@ export var GOOGLE_CLIENT_ID = "242626251664-pg5lmetaaaqreh3pddstjs3q1239nqnp.app
 
 export var Data = {
   1: {
-    question: "1 - have you been tested positive for COVID 19?",
+    question: "have you been tested positive for COVID 19?",
     options: [
       {
         option: "Tested Positive",
@@ -25,7 +25,7 @@ export var Data = {
   },
   2: {
     question:
-      "2 - Since you stated you either tested negative or had symptoms, wolud you still like to record your heatlh",
+      "Since you stated you either tested negative or had symptoms, wolud you still like to record your heatlh",
     options: [
       {
         option: "Yes",
@@ -41,7 +41,7 @@ export var Data = {
   },
   3: {
     question:
-      "3 - You stated you have been tested positive for COVID-19; Do you wish to record your symptoms?",
+      "You stated you have been tested positive for COVID-19; Do you wish to record your symptoms?",
     options: [
       {
         option: "Yes",
@@ -56,7 +56,7 @@ export var Data = {
     ],
   },
   4: {
-    question: "4 - Are you experiencing any headaches?",
+    question: "Are you experiencing any headaches?",
     options: [
       {
         option: "Yes",
@@ -76,7 +76,7 @@ export var Data = {
     ],
   },
   5: {
-    question: "5 - Do you have a constant dry cough?",
+    question: "Do you have a constant dry cough?",
     options: [
       {
         option: "Yes",
@@ -96,7 +96,7 @@ export var Data = {
     ],
   },
   6: {
-    question: "6 - Do you have a fever?",
+    question: "Do you have a fever?",
     options: [
       {
         option: "Yes",
@@ -115,7 +115,7 @@ export var Data = {
     ],
   },
   7: {
-    question: "7 - Do you feel tired or have body pain?",
+    question: "Do you feel tired or have body pain?",
     options: [
       {
         option: "Yes",
@@ -135,7 +135,7 @@ export var Data = {
     ],
   },
   8: {
-    question: "8 - Do you have lost sense of taste?",
+    question: "Do you have lost sense of taste?",
     options: [
       {
         option: "Yes",
@@ -154,7 +154,7 @@ export var Data = {
     ],
   },
   9: {
-    question: "9 - Do you have lost sense of smell?",
+    question: "Do you have lost sense of smell?",
     options: [
       {
         option: "Yes",
@@ -173,7 +173,7 @@ export var Data = {
     ],
   },
   10: {
-    question: "10 - Do you have a shortness of breath or difficulty breathing?",
+    question: "Do you have a shortness of breath or difficulty breathing?",
     options: [
       {
         option: "Yes",
@@ -194,7 +194,7 @@ export var Data = {
     ],
   },
   11: {
-    question: "11 - Do you feel nauseous?",
+    question: "Do you feel nauseous?",
     options: [
       {
         option: "Yes",
@@ -216,7 +216,7 @@ export var Data = {
     ],
   },
   12: {
-    question: "12 - Do you feel better than yesterday or the same?",
+    question: "Do you feel better than yesterday or the same?",
     options: [
       {
         option: "I feel better",

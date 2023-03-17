@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../assets/css/slider.css";
 import { Data } from "../service/utility";
 
-const Slider = ({ data, onClick, onClickSubmit }) => {
+const Slider = ({ data, onClick, onClickSubmit , count }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [selectBtn, setSelectBtn] = useState("");
   const [selectAnswer, setSelectAnswer] = useState("");
+
   const [currentQuestion, setCurrentQuestion] = useState({
     question: "",
     options: [],
@@ -67,7 +68,7 @@ const Slider = ({ data, onClick, onClickSubmit }) => {
               src={require("../assets/img/question.png")}
             />
             <p className="font-25 font-outfit text-black font-800">
-              {currentQuestion?.question}
+            {count} - {currentQuestion?.question}
             </p>
             <div className="d-flex justify-content-around mt-4">
               {currentQuestion?.options?.length

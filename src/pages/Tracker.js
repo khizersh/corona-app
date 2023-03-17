@@ -12,6 +12,7 @@ const Tracker = () => {
   const [action, setAction] = useState("");
   const [user, setUser] = useState({});
   const [end, setEnd] = useState(false);
+  const [count, setCount] = useState(1);
 
   const [list, setList] = useState([]);
   const [currentList, setCurrentList] = useState([]);
@@ -53,6 +54,8 @@ const Tracker = () => {
       const data = await response.json();
 
       if (data && data.status == "0000") {
+        let currentCount = count + 1;
+        setCount(currentCount)
       } else if (data && data.status == "9999") {
         swal("Error!", data.message, "error");
       } else {
@@ -68,7 +71,6 @@ const Tracker = () => {
           currentList.forEach((element) => {
             oldList.push(element);
           });
-          console.log("oldList after : ", oldList);
           setList(oldList);
         }
         // if (option?.list?.length) {
@@ -95,9 +97,10 @@ const Tracker = () => {
           data={currentQuestion}
           onClick={onClickAnswer}
           onClickSubmit={onClickSubmit}
+          count={count}
         />
       ) : (
-        <div className="slideshow-container">
+        <div className="slideshow-container thanks">
           <div className="bg-green p-3 text-center">
             <h1 className="text-black weight-800 font-outfit">
               Thank you for your information!

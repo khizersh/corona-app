@@ -23,6 +23,7 @@ li {
 
 .purple-bg {
   background-color: #171948;
+  min-height: 100vh;
 }
 
 .decoration-none {

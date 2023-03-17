@@ -112,14 +112,14 @@ export const DashboardLayout = (props) => {
             active: true,
             hr: false,
           },
-          {
-            key: "my-calender",
-            url: "/dashboard/admin/my-calender",
-            name: "User Calender",
-            icon: "fa fa-user",
-            active: true,
-            hr: false,
-          },
+          // {
+          //   key: "my-calender",
+          //   url: "/dashboard/admin/my-calender",
+          //   name: "User Calender",
+          //   icon: "fa fa-user",
+          //   active: true,
+          //   hr: false,
+          // },
           {
             key: "logout",
             url: "/dashboard/logout",

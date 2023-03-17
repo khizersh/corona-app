@@ -9,13 +9,17 @@
   margin: auto;
 }
 
+.thanks {
+  margin: 10% auto;
+}
+
 /* Hide the images by default */
 /* .mySlides {
   display: none;
 } */
 
-.question-img{
-    width: 300px;
+.question-img {
+  width: 300px;
 }
 
 .bg-green {
