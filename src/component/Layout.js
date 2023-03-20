@@ -24,7 +24,7 @@ const Layout = (props) => {
       {isDashboard ? (
         <DashboardLayout>{props.children}</DashboardLayout>
       ) : (
-        <div className="purple-bg">
+        <div className="purple-bg ">
           {isMobile ? <Header /> : <DesktopHeader /> }
           {props.children}
         </div>

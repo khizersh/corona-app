@@ -91,7 +91,7 @@ const Tracker = () => {
   };
 
   return (
-    <div className="min-height">
+    <div className="min-height min-height-100">
       {end === false ? (
         <Slider
           data={currentQuestion}

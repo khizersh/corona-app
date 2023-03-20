@@ -25,8 +25,8 @@
 }
 
 .d-px-5 {
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 8rem !important;
+  padding-right: 8rem !important;
 }
 
 @media screen and (max-width: 900px) {

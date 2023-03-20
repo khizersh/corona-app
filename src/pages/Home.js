@@ -1,16 +1,41 @@
 import React from "react";
 import "../assets/css/home.css";
+import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 const Home = () => {
+  const router = useHistory();
+
+  const onClickTracker = () => {
+    router.push("/tracker");
+  };
+
+  const onClickDashboard = () => {
+    let user = localStorage.getItem("user");
+    if (user) {
+      window.location.href = "/dashboard/admin/my-calender";
+    } else {
+      swal("Error!", "Please login first!", "error");
+    }
+  };
+  const onClickSignup = () => {
+    let user = localStorage.getItem("user");
+    if (user) {
+      swal("Error!", "You are already login!", "error");
+    } else {
+      router.push("/signup");
+    }
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-12 col-lg-6 px-5 pt-5 text-left">
+        <div className="col-12 col-lg-6 px-5 pt-5 text-center">
           <h1 className="font-96 font-mbl">
             Your health <br /> in your <br /> hands
           </h1>
         </div>
-        <div className="col-12 col-lg-6 text-right">
+        <div className="col-12 col-lg-6 text-center">
           <img
             alt="Building"
             className="image-building "
@@ -92,7 +117,9 @@ const Home = () => {
             src={require("../assets/img/timetable.png")}
           />
           <div className="text-center mt-4">
-            <button className="btn btn-danger">dashboard</button>
+            <button className="btn btn-danger" onClick={onClickDashboard}>
+              dashboard
+            </button>
           </div>
         </div>
         <div className="col-12 col-lg-6 text-center">
@@ -103,7 +130,9 @@ const Home = () => {
             src={require("../assets/img/diary.png")}
           />
           <div className="text-center mt-4">
-            <button className="btn btn-danger">tracker</button>
+            <button className="btn btn-danger" onClick={onClickTracker}>
+              tracker
+            </button>
           </div>
         </div>
       </div>
@@ -112,7 +141,9 @@ const Home = () => {
           <p className="text-green font-40">Dont Have A Account Yet?</p>
           <p className="font-40 mt-4">Sign up here in less than a minute</p>
           <div className="text-center mt-4">
-            <button className="btn btn-danger">sign up</button>
+            <button className="btn btn-danger" onClick={onClickSignup}>
+              sign up
+            </button>
           </div>
         </div>
         <div className="col-12 col-lg-6 text-center ">

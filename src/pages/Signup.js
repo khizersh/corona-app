@@ -180,7 +180,7 @@ const Signup = () => {
             src={require("../assets/img/account.png")}
           />
           <div className="mt-3">
-            <button className="purple-bg none-border">
+            <button className="purple-bg none-border ">
               {/* <img
                   alt="Building"
                   className=""
