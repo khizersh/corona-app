@@ -4,7 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import swal from "sweetalert";
 import "../../assets/css/calender.css";
-import { BASE_URL } from "../../service/utility";
+import { BASE_URL, ERROR_IMAGE } from "../../service/utility";
 import 'react-accessible-accordion/dist/fancy-example.css';
 import { useHistory } from "react-router-dom";
 import {
@@ -50,9 +50,9 @@ const CustomCalender = () => {
     if (data && data.status == "0000") {
       setDateList(data.data.map((m) => m.date));
     } else if (data && data.status == "9999") {
-      swal("Error!", data.message, "error");
+      swal("Error!", data.message, ERROR_IMAGE);
     } else {
-      swal("Error!", "Something went wrong!", "error");
+      swal("Error!", "Something went wrong!", ERROR_IMAGE);
     }
   };
 
@@ -76,9 +76,9 @@ const CustomCalender = () => {
       setInformation(data.data.infoList);
       console.log("data.data : ", data.data.infoList);
     } else if (data && data.status == "9999") {
-      swal("Error!", data.message, "error");
+      swal("Error!", data.message, ERROR_IMAGE);
     } else {
-      swal("Error!", "Something went wrong!", "error");
+      swal("Error!", "Something went wrong!", ERROR_IMAGE);
     }
   };
 

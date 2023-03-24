@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import "../assets/css/login.css";
-import { BASE_URL, GOOGLE_CLIENT_ID } from "../service/utility";
+import { BASE_URL, ERROR_IMAGE, GOOGLE_CLIENT_ID } from "../service/utility";
 // import GoogleLogin from "react-google-login";
 import { useGoogleLogin, hasGrantedAnyScopeGoogle } from "@react-oauth/google";
 import { hasGrantedAllScopesGoogle } from "@react-oauth/google";
@@ -21,7 +21,7 @@ const Signup = () => {
   const [passwordCount, setPasswordCount] = useState(0);
 
   const responseGoogle = (response) => {
-    if (response["error"]) {
+    if (response[ERROR_IMAGE]) {
       console.log("response error : ", response);
     } else {
       console.log("response Success : ", response);
@@ -72,9 +72,9 @@ const Signup = () => {
         router.push("/");
       });
     } else if (data && data.status == "9999") {
-      swal("Error!", data.message, "error");
+      swal("Error!", data.message, ERROR_IMAGE);
     } else {
-      swal("Error!", "Something went wrong!", "error");
+      swal("Error!", "Something went wrong!", ERROR_IMAGE);
     }
   };
 
@@ -110,9 +110,9 @@ const Signup = () => {
           router.push("/signin");
         });
       } else if (data && data.status == "9999") {
-        swal("Error!", data.message, "error");
+        swal("Error!", data.message, ERROR_IMAGE);
       } else {
-        swal("Error!", "Something went wrong!", "error");
+        swal("Error!", "Something went wrong!", ERROR_IMAGE);
       }
     }else{
       swal("Warning!", "Password is not secure!", "warning");

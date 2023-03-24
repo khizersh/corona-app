@@ -9,7 +9,7 @@ h3,
 h4,
 a,
 li {
-  color: white;
+  color: white  !important;
 }
 
 .cursor-pointer:hover {
@@ -22,7 +22,21 @@ li {
 }
 
 .purple-bg {
-  background-color: #171948;
+  background-color: #171948 !important;
+}
+
+.text-purple {
+  color: #171948 !important;
+}
+
+.black-text{
+  color: black  !important;
+}
+
+.eye-icon {
+  position: relative;
+  bottom: 32px;
+  left: 92%;
 }
 
 .min-height-100 {
@@ -112,5 +126,5 @@ li {
 /* colors */
 
 .text-green {
-  color: #00f09a;
+  color: #00f09a !important;
 }

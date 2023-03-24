@@ -18,7 +18,7 @@ const TreatmentList = (props) => {
         <div className="col-12">
           <ul>
             {list.length
-              ? list.map((prec) => <li className="text-green font-outfit">{prec}</li>)
+              ? list.map((prec) => <li className="text-black font-outfit">{prec}</li>)
               : " "}
           </ul>
         </div>

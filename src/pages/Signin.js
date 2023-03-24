@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../assets/css/login.css";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
-import { BASE_URL } from "../service/utility";
+import { BASE_URL, ERROR_IMAGE } from "../service/utility";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 
@@ -34,12 +34,12 @@ const Signin = () => {
       if (data && data.status == "0000") {
         localStorage.setItem("user", JSON.stringify(data.data));
         swal("Success!", "User login successfully!", "success").then((m) => {
-          router.push("/");
+          window.location.replace("/")
         });
       } else if (data && data.status == "9999") {
-        swal("Error!", data.message, "error");
+        swal("Error!", data.message, ERROR_IMAGE);
       } else {
-        swal("Error!", "Something went wrong!", "error");
+        swal("Error!", "Something went wrong!", ERROR_IMAGE);
       }
     } catch (error) {}
   };
@@ -67,12 +67,12 @@ const Signin = () => {
     if (data && data.status == "0000") {
       localStorage.setItem("user", JSON.stringify(data.data));
       swal("Success!", "User signin successfully!", "success").then((m) => {
-        router.push("/");
+        window.location.replace("/")
       });
     } else if (data && data.status == "9999") {
-      swal("Error!", data.message, "error");
+      swal("Error!", data.message, ERROR_IMAGE);
     } else {
-      swal("Error!", "Something went wrong!", "error");
+      swal("Error!", "Something went wrong!", ERROR_IMAGE);
     }
   };
   return (

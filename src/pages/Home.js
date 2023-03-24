@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../assets/css/home.css";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
+import { ERROR_IMAGE } from "../service/utility";
 
 const Home = () => {
   const router = useHistory();
@@ -15,17 +16,19 @@ const Home = () => {
     if (user) {
       window.location.href = "/dashboard/admin/my-calender";
     } else {
-      swal("Error!", "Please login first!", "error");
+      swal("Error!", "Please login first!", ERROR_IMAGE);
     }
   };
   const onClickSignup = () => {
     let user = localStorage.getItem("user");
     if (user) {
-      swal("Error!", "You are already login!", "error");
+      swal("Error!", "You are already login!", ERROR_IMAGE);
     } else {
       router.push("/signup");
     }
   };
+
+  useEffect(() => {}, [window.location]);
 
   return (
     <div className="container-fluid">

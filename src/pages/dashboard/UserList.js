@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import Modal from "react-modal";
-import { BASE_URL } from "../../service/utility";
+import { BASE_URL, ERROR_IMAGE } from "../../service/utility";
 
 const UserList = () => {
   const [selected, setSelected] = useState("halal-stock-search");
@@ -71,9 +71,9 @@ const UserList = () => {
         window.location.reload();
       });
     } else if (data && data.status == "9999") {
-      swal("Error!", data.message, "error");
+      swal("Error!", data.message, ERROR_IMAGE);
     } else {
-      swal("Error!", "Something went wrong!", "error");
+      swal("Error!", "Something went wrong!", ERROR_IMAGE);
     }
   };
 
@@ -107,9 +107,9 @@ const UserList = () => {
             }
           );
         } else if (data && data.status == "9999") {
-          swal("Error!", data.message, "error");
+          swal("Error!", data.message, ERROR_IMAGE);
         } else {
-          swal("Error!", "Something went wrong!", "error");
+          swal("Error!", "Something went wrong!", ERROR_IMAGE);
         }
       }
     });
@@ -128,9 +128,9 @@ const UserList = () => {
     if (data && data.status == "0000") {
       setUserList(data.data);
     } else if (data && data.status == "9999") {
-      swal("Error!", data.message, "error");
+      swal("Error!", data.message, ERROR_IMAGE);
     } else {
-      swal("Error!", "Something went wrong!", "error");
+      swal("Error!", "Something went wrong!", ERROR_IMAGE);
     }
   };
 

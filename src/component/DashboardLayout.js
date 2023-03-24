@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import Modal from "react-modal";
-import { BASE_URL } from "../service/utility";
+import { BASE_URL, ERROR_IMAGE } from "../service/utility";
 // import { getSymbols } from "utility";
 
 export const DashboardLayout = (props) => {
@@ -86,16 +86,16 @@ export const DashboardLayout = (props) => {
                 }
               );
             } else if (data && data.status == "9999") {
-              swal("Error!", data.message, "error");
+              swal("Error!", data.message, ERROR_IMAGE);
             } else {
-              swal("Error!", "Something went wrong!", "error");
+              swal("Error!", "Something went wrong!", ERROR_IMAGE);
             }
           });
       } else {
-        swal("Oops!", "Password not matched.", "warning");
+        swal("Oops!", "Password not matched.", ERROR_IMAGE);
       }
     } else {
-      swal("Error!", "Enter valid current password!.", "error");
+      swal("Error!", "Enter valid current password!.", ERROR_IMAGE);
     }
   };
 
@@ -104,6 +104,15 @@ export const DashboardLayout = (props) => {
     if (user) {
       if (user.role == "admin") {
         return [
+          {
+            key: "",
+            url: "/",
+            name: "Home",
+            icon: "fa fa-home",
+            active: true,
+            hr: false,
+            home: true,
+          },
           {
             key: "user",
             url: "/dashboard/admin/user",
@@ -133,6 +142,15 @@ export const DashboardLayout = (props) => {
       } else {
         return [
           {
+            key: "",
+            url: "/",
+            name: "Home",
+            icon: "fa fa-home",
+            active: true,
+            hr: false,
+            home: true,
+          },
+          {
             key: "my-calender",
             url: "/dashboard/admin/my-calender",
             name: "User Calender",
@@ -151,9 +169,8 @@ export const DashboardLayout = (props) => {
           },
         ];
       }
-    }
-    else{
-      return []
+    } else {
+      return [];
     }
   }
 
@@ -162,7 +179,11 @@ export const DashboardLayout = (props) => {
     if (sidebar.onClick) {
       sidebar.onClick();
     }
+    console.log("click : ", sidebar);
     setIsClose(true);
+    if (sidebar.home) {
+      window.location.replace("/");
+    }
   }
 
   function getPageNameByKey(key) {
@@ -180,7 +201,7 @@ export const DashboardLayout = (props) => {
     if (user) {
       localStorage.removeItem("user");
       swal("Success!", "Logout successfully!", "success").then((m) => {
-        window.location.replace("/")
+        window.location.replace("/");
         // router.push("/");
       });
     }
@@ -207,12 +228,15 @@ export const DashboardLayout = (props) => {
       if (userData.email) {
         setSidebar(getList());
       } else {
-        window.location.replace("/")
-        // router.push("/signin");
+        swal("Oops!", "You are not logged in!", ERROR_IMAGE).then((m) => {
+          window.location.replace("/");
+        });
       }
     } else {
-      window.location.replace("/")
-      // router.push("/signin");
+      swal("Oops!", "You are not logged in!", ERROR_IMAGE).then((m) => {
+        window.location.replace("/");
+        // router.push("/");
+      });
     }
     setPage(getPageNameByKey(selected));
   }, [selected]);

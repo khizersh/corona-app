@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
 import Slider from "../component/Slider";
 import TreatmentList from "../component/TreatmentList";
-import { BASE_URL, Data } from "../service/utility";
+import { BASE_URL, Data, ERROR_IMAGE } from "../service/utility";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
 
@@ -57,9 +57,9 @@ const Tracker = () => {
         let currentCount = count + 1;
         setCount(currentCount)
       } else if (data && data.status == "9999") {
-        swal("Error!", data.message, "error");
+        swal("Error!", data.message, ERROR_IMAGE);
       } else {
-        swal("Error!", "Something went wrong!", "error");
+        swal("Error!", "Something went wrong!", ERROR_IMAGE);
       }
       if (action != "end") {
         setCurrentQuestion(Data[action]);
@@ -67,11 +67,11 @@ const Tracker = () => {
           (opt) => opt.option == selectedOption
         );
         if (currentList?.length) {
-          let oldList = list;
-          currentList.forEach((element) => {
-            oldList.push(element);
-          });
-          setList(oldList);
+          // let oldList = list;
+          // currentList.forEach((element) => {
+          //   oldList.push(element);
+          // });
+          setList(currentList);
         }
         // if (option?.list?.length) {
         //   let oldList = list;
@@ -84,7 +84,7 @@ const Tracker = () => {
         setEnd(true);
       }
     } else {
-      swal("Error!", "Please login first!", "error").then((r) =>
+      swal("Error!", "Please login first!", ERROR_IMAGE).then((r) =>
         router.push("/signin")
       );
     }
