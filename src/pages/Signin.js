@@ -15,7 +15,7 @@ const Signin = () => {
 
   const onChange = (e) => {
     let value = e.target.value;
-    
+
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
@@ -34,7 +34,7 @@ const Signin = () => {
       if (data && data.status == "0000") {
         localStorage.setItem("user", JSON.stringify(data.data));
         swal("Success!", "User login successfully!", "success").then((m) => {
-          window.location.replace("/")
+          window.location.replace("/");
         });
       } else if (data && data.status == "9999") {
         swal("Error!", data.message, ERROR_IMAGE);
@@ -67,12 +67,34 @@ const Signin = () => {
     if (data && data.status == "0000") {
       localStorage.setItem("user", JSON.stringify(data.data));
       swal("Success!", "User signin successfully!", "success").then((m) => {
-        window.location.replace("/")
+        window.location.replace("/");
       });
     } else if (data && data.status == "9999") {
       swal("Error!", data.message, ERROR_IMAGE);
     } else {
       swal("Error!", "Something went wrong!", ERROR_IMAGE);
+    }
+  };
+
+  const onClickForget = async () => {
+    if (user.email && user.email.includes("@")) {
+      const response = await fetch(BASE_URL + "/token/forget", {
+        method: "POST",
+        body: JSON.stringify({ email: user.email }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const data = await response.json();
+      if (data && data.status == "0000") {
+        swal("Success!", "Email send successfully!", "success");
+      } else if (data && data.status == "9999") {
+        swal("Error!", data.message, ERROR_IMAGE);
+      } else {
+        swal("Error!", "Something went wrong!", ERROR_IMAGE);
+      }
+    } else {
+      swal("Error!", "Email not valid!", ERROR_IMAGE);
     }
   };
   return (
@@ -151,6 +173,9 @@ const Signin = () => {
                   Don't have an account?{" "}
                   <a href="/signup" className="text-black">
                     Sign up
+                  </a>{" | "}
+                  <a onClick={onClickForget} className="cursor-pointer text-black">
+                    Forget Password?
                   </a>{" "}
                 </p>
               </div>

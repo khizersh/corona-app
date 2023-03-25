@@ -82,7 +82,7 @@ export const DashboardLayout = (props) => {
               localStorage.setItem("user", JSON.stringify(data.data));
               swal("Success!", "Password reset successfully!", "success").then(
                 (m) => {
-                  router.push("/dashboard/stock-finder");
+                  router.push("/");
                 }
               );
             } else if (data && data.status == "9999") {

@@ -14,6 +14,7 @@ import Signin from "./pages/Signin";
 import UserList from "./pages/dashboard/UserList";
 import CustomCalender from "./pages/dashboard/CustomCalender";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Token from "./pages/Token";
 // import "./assets/css/"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -27,6 +28,11 @@ root.render(
             path="/tracker"
             exact
             render={(props) => <Tracker {...props} />}
+          />
+          <Route
+            path="/token"
+            exact
+            render={(props) => <Token {...props} />}
           />
           <Route
             path="/signup"

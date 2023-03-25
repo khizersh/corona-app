@@ -9,7 +9,7 @@ h3,
 h4,
 a,
 li {
-  color: white  !important;
+  color: white !important;
 }
 
 .cursor-pointer:hover {
@@ -29,8 +29,8 @@ li {
   color: #171948 !important;
 }
 
-.black-text{
-  color: black  !important;
+.black-text {
+  color: black !important;
 }
 
 .eye-icon {
@@ -127,4 +127,16 @@ li {
 
 .text-green {
   color: #00f09a !important;
+}
+
+.margin-center {
+  padding-top: 15%;
+}
+
+.reset-password {
+  width: 20%;
+  margin: 0 auto;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
 }
