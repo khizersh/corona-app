@@ -26,6 +26,10 @@
   background-color: #00f09a;
 }
 
+.bg-green:hover {
+  background-color: #00f09a !important;
+}
+
 /* Next & previous buttons */
 .prev,
 .next {

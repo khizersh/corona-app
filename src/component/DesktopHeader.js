@@ -9,6 +9,7 @@ import "../assets/css/common.css";
 const DesktopHeader = () => {
   const router = useHistory();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
   const [userName, setUserName] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -89,16 +90,16 @@ const DesktopHeader = () => {
   };
   const onClickCalender = (e) => {
     if (userName) {
-      window.location.replace("/dashboard/admin/my-calender")
+      window.location.replace("/dashboard/admin/my-calender");
     } else {
-      swal("Oops!", "you are not logged in!", ERROR_IMAGE);
+      // swal("Oops!", "you are not logged in!", ERROR_IMAGE);
+      setErrorModal(true);
     }
   };
 
   useEffect(() => {
     // const userData = JSON.parse(localStorage.getItem("user"));
     const userData = localStorage.getItem("user");
-    console.log("user : ", userData);
     if (userData) {
       const user = JSON.parse(userData);
       if (user && user.lastName) {
@@ -106,6 +107,11 @@ const DesktopHeader = () => {
       }
     }
   }, [userName]);
+
+  const onClickPopupBtn = (route) => {
+    setErrorModal(false)
+    router.push(route)
+  };
 
   function logout() {
     let user = localStorage.getItem("user");
@@ -275,6 +281,39 @@ const DesktopHeader = () => {
               </button>
             </div>
           </div>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={errorModal}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h3 className="weight-700 font-outfit modal-heading text-center text-black">
+          Oops!
+        </h3>
+        <div className="text-center">
+          <img src={require("../assets/img/must.png")} width="150px"/>
+        </div>
+        <h3 className="weight-700 my-2 font-outfit modal-heading text-center text-purple weight-500 mb-5">
+          To use this page you must be signed in!
+        </h3>
+        <div className="d-flex justify-content-between">
+          <button
+            type="button"
+            className="btn bg-green text-black  mb-2"
+            onClick={() => onClickPopupBtn("/signup")}
+          >
+            Sign up
+          </button>
+          <button
+            type="button"
+            className="btn bg-green text-black  mb-2"
+            onClick={() => onClickPopupBtn("/signin")}
+          >
+            Login
+          </button>
         </div>
       </Modal>
     </>

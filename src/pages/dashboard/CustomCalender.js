@@ -135,7 +135,7 @@ const CustomCalender = () => {
                       </p>
                       <ul>
                         {info.treatment.map((m) => (
-                          <li className="text-green font-outfit text-left">
+                          <li className="text-black font-outfit text-left">
                             {m}
                           </li>
                         ))}

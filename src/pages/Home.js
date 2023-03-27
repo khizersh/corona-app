@@ -150,7 +150,6 @@ const Home = () => {
           </div>
         </div>
         <div className="col-12 col-lg-6 text-center ">
-          <p className="text-green mb-3 font-40">Your own COVID Diary!</p>
           <img
             alt="Building"
             className="time-img"
