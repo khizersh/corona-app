@@ -10,7 +10,10 @@
 }
 
 .thanks {
-  margin: 10% auto;
+  margin: 5% auto;
+  background-color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 /* Hide the images by default */

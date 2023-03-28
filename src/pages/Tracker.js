@@ -40,8 +40,7 @@ const Tracker = () => {
     // references are now sync'd and can be accessed.
   }
 
-  function closeModal() {
-  }
+  function closeModal() {}
 
   const onClickAnswer = (btn) => {
     setAction(btn.action);
@@ -49,8 +48,8 @@ const Tracker = () => {
   };
 
   const onClickPopupBtn = (route) => {
-    setErrorModal(false)
-    router.push(route)
+    setErrorModal(false);
+    router.push(route);
   };
   const onClickSubmit = async (selectedOption) => {
     // console.log("option : ", selectedOption, action);
@@ -116,8 +115,7 @@ const Tracker = () => {
       // swal("Error!", "Please login first!", ERROR_IMAGE).then((r) =>
       //   router.push("/signin")
       // );
-      setErrorModal(true)
-     
+      setErrorModal(true);
     }
   };
 
@@ -133,10 +131,25 @@ const Tracker = () => {
           />
         ) : (
           <div className="slideshow-container thanks">
-            <div className="bg-green p-3 text-center">
-              <h1 className="text-black weight-800 font-outfit">
-                Thank you for your information!
-              </h1>
+            <h3 className="weight-700 font-outfit modal-heading text-center text-black">
+              Thank you for completing the questions.
+            </h3>
+            <div className="text-center">
+              <img src={require("../assets/img/complete.png")} width="150px" />
+            </div>
+            <h3 className="weight-700 my-2 font-outfit modal-heading text-center text-black weight-700 mb-5">
+              If you wish to view your dashboard click below
+            </h3>
+            <div className="text-center">
+              <button
+                type="button"
+                className="btn bg-green text-black  mb-2"
+                onClick={() =>
+                  window.location.replace("/dashboard/admin/my-calender")
+                }
+              >
+                Dashboard
+              </button>
             </div>
           </div>
         )}
@@ -156,7 +169,7 @@ const Tracker = () => {
           Oops!
         </h3>
         <div className="text-center">
-          <img src={require("../assets/img/must.png")} width="150px"/>
+          <img src={require("../assets/img/must.png")} width="150px" />
         </div>
         <h3 className="weight-700 my-2 font-outfit modal-heading text-center text-purple weight-500 mb-5">
           To use this page you must be signed in!
