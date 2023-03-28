@@ -10,10 +10,23 @@ import Modal from "react-modal";
 const Signin = () => {
   const router = useHistory();
   const [errorModal, setErrorModal] = useState(false);
+  const [errorModalLogin, setErrorModalLogin] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    let userD = localStorage.getItem("user");
+    if (userD) {
+      setErrorModalLogin(true);
+    }
+  }, []);
+
+  const onClickOk = () => {
+    setErrorModalLogin(false);
+    router.push("/");
+  };
 
   var customStyles = {
     content: {
@@ -112,7 +125,7 @@ const Signin = () => {
       const data = await response.json();
       if (data && data.status == "0000") {
         swal("Success!", "Email send successfully!", "success");
-        setErrorModal(false)
+        setErrorModal(false);
       } else if (data && data.status == "9999") {
         swal("Error!", data.message, ERROR_IMAGE);
       } else {
@@ -254,6 +267,33 @@ const Signin = () => {
             onClick={() => setErrorModal(false)}
           >
             Retry
+          </button>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={errorModalLogin}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <h3 className="weight-700 font-outfit modal-heading text-center text-black">
+          Looks like we have a wizard among us!
+        </h3>
+        <div className="text-center">
+          <img src={require("../assets/img/wizard.png")} width="150px" />
+        </div>
+        <h3 className="weight-700 my-2 font-outfit modal-heading text-center text-black weight-700 font-20">
+          You are already logged in.
+        </h3>
+
+        <div className="text-right">
+          <button
+            type="button"
+            className="btn bg-green  text-black  mb-2"
+            onClick={() => onClickOk()}
+          >
+            OK
           </button>
         </div>
       </Modal>

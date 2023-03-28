@@ -135,6 +135,11 @@ const DesktopHeader = () => {
           </div>
           <div className="col-8">
             <div className="row">
+               <div className="col-2 text-center">
+                {/* <Link to={"/"} className="text-decoration-none font-17">
+                  who are we?
+                </Link> */}
+              </div>
               <div className="col-3 text-center ">
                 <Link to={"/tracker"} className="text-decoration-none font-17">
                   Symptoms tracker
@@ -148,11 +153,7 @@ const DesktopHeader = () => {
                   my dashboard
                 </a>
               </div>
-              <div className="col-2 text-center">
-                <Link to={"/"} className="text-decoration-none font-17">
-                  who are we?
-                </Link>
-              </div>
+             
               <div className="col-2 text-center">
                 {/* <Link to={"/signin"} className="text-decoration-none font-17">login/signup</Link> */}
                 {userName ? (

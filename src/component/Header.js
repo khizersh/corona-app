@@ -140,19 +140,7 @@ class Header extends React.Component {
                       </Link>
                     </DropdownToggle>
                   </UncontrolledDropdown>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <Link
-                        to="/support"
-                        className="text-white decoration-none margin-header"
-                      >
-                        <i className="ni ni-collection d-lg-none mr-1" />
-                        <span className="nav-link-inner--text text-white">
-                          who are we?
-                        </span>
-                      </Link>
-                    </DropdownToggle>
-                  </UncontrolledDropdown>
+
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <Link to="/signin" className="text-white decoration-none">

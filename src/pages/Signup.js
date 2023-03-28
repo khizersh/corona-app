@@ -21,6 +21,13 @@ const Signup = () => {
   });
   const [errorModal, setErrorModal] = useState(false);
 
+  useEffect(() => {
+    let userD = localStorage.getItem("user");
+    if (userD) {
+      setErrorModal(true);
+    }
+  }, []);
+
   var customStyles = {
     content: {
       padding: "30px",
