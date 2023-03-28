@@ -124,10 +124,10 @@ const Signup = () => {
 
   const onClick = async () => {
     try {
-      let user = null;
-      user = localStorage.getItem("user");
+      let userLocal = null;
+      userLocal = localStorage.getItem("user");
 
-      if (!user) {
+      if (!userLocal) {
         if (passwordCount > 1) {
           const response = await fetch(BASE_URL + "/user/signup", {
             method: "POST",

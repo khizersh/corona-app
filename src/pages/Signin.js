@@ -57,26 +57,29 @@ const Signin = () => {
 
   const onClick = async () => {
     try {
-      const response = await fetch(BASE_URL + "/user/signin", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-
-      const data = await response.json();
-
-      if (data && data.status == "0000") {
-        localStorage.setItem("user", JSON.stringify(data.data));
-        swal("Success!", "User login successfully!", "success").then((m) => {
-          window.location.replace("/");
+      if (user.email && user.password) {
+        const response = await fetch(BASE_URL + "/user/signin", {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
         });
-      } else if (data && data.status == "9999") {
-        // swal("Error!", data.message, ERROR_IMAGE);
-        setErrorModal(true);
+
+        const data = await response.json();
+
+        if (data && data.status == "0000") {
+          localStorage.setItem("user", JSON.stringify(data.data));
+          swal("Success!", "User login successfully!", "success").then((m) => {
+            window.location.replace("/");
+          });
+        } else if (data && data.status == "9999") {
+          setErrorModal(true);
+        } else {
+          swal("Error!", "Something went wrong!", ERROR_IMAGE);
+        }
       } else {
-        swal("Error!", "Something went wrong!", ERROR_IMAGE);
+        swal("Error!", "Enter valid credential!", ERROR_IMAGE);
       }
     } catch (error) {}
   };
