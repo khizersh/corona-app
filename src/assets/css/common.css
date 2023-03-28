@@ -13,6 +13,14 @@ li {
   color: white !important;
 }
 
+.min-height-100 {
+  min-height: 100vh;
+}
+
+.bg-white {
+  background-color: white !important;
+}
+
 .cursor-pointer:hover {
   cursor: pointer;
 }

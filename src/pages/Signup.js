@@ -215,7 +215,7 @@ const Signup = () => {
   };
   return (
     <>
-      <div className="container margin-top-100">
+      <div className="container margin-top-100 min-height-100">
         <div className="row">
           <div className="col-12 col-lg-5 text-center">
             <img

@@ -83,7 +83,7 @@ const CustomCalender = () => {
   };
 
   return (
-    <div className="container bg-calender">
+    <div className="container bg-calender bg-white">
       <div className="row">
         <div className="col-12">
           <p className="text-black">Note : <i>Red Outline Day denoted your saved data</i></p>

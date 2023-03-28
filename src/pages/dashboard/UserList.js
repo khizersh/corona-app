@@ -140,7 +140,7 @@ const UserList = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container bg-white">
         <div className="row">
           <div className="col-12">
             <table class="table table-hover">

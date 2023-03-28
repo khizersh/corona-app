@@ -10,11 +10,14 @@ import Modal from "react-modal";
 const Signin = () => {
   const router = useHistory();
   const [errorModal, setErrorModal] = useState(false);
+  const [emailForget, setEmailForget] = useState(false);
   const [errorModalLogin, setErrorModalLogin] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  const [resetEmail, setResetEmail] = useState("");
 
   useEffect(() => {
     let userD = localStorage.getItem("user");
@@ -139,14 +142,42 @@ const Signin = () => {
     }
   };
 
+  const onClickForgetEmail = async () => {
+    if (resetEmail && resetEmail.includes("@")) {
+      const response = await fetch(BASE_URL + "/token/forget", {
+        method: "POST",
+        body: JSON.stringify({ email: resetEmail }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      setResetEmail(false)
+      const data = await response.json();
+      if (data && data.status == "0000") {
+        swal("Success!", "Email send successfully!", "success");
+        setErrorModal(false);
+      } else if (data && data.status == "9999") {
+        swal("Error!", data.message, ERROR_IMAGE);
+      } else {
+        swal("Error!", "Something went wrong!", ERROR_IMAGE);
+      }
+    } else {
+      swal("Error!", "Email not valid!", ERROR_IMAGE);
+    }
+  };
+
   const onClickPopupBtn = (route) => {
     setErrorModal(false);
     router.push(route);
   };
 
+  const onChangeEmail = (email) => {
+    setResetEmail(email);
+  };
+
   return (
     <>
-      <div className="container margin-top-100">
+      <div className="container margin-top-100 min-height-100">
         <div className="row">
           <div className="col-12 col-lg-5 text-center">
             <img
@@ -224,7 +255,8 @@ const Signin = () => {
                     </a>
                     {" | "}
                     <a
-                      onClick={onClickForget}
+                      // onClick={onClickForget}
+                      onClick={() => setEmailForget(true)}
                       className="cursor-pointer text-black"
                     >
                       Forget Password?
@@ -298,6 +330,43 @@ const Signin = () => {
           >
             OK
           </button>
+        </div>
+      </Modal>
+      <Modal
+        isOpen={emailForget}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="">
+          <h5 className="modal-heading  text-black text-center weight-500 mb-5">
+            Reset Password
+          </h5>
+          <div>
+            <div className="form-group mt-3">
+              <div class="form-group m-0">
+                <p className="text-black m-0">Enter email</p>
+                <input
+                  type={"email"}
+                  name="confirmPassword"
+                  className="form-control"
+                  onChange={(e) => onChangeEmail(e.target.value)}
+                  id="your_pass"
+                  placeholder="Enter your email to reset."
+                />
+              </div>
+              <div className="form-group mt-3">
+                <button
+                  type="button"
+                  class="btn purple-bg text-white w-100 mb-2"
+                  onClick={onClickForgetEmail}
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </Modal>
     </>

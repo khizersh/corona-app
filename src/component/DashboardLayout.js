@@ -269,7 +269,7 @@ export const DashboardLayout = (props) => {
 
   return (
     <>
-      <header>
+      <header className="bg-white">
         {/* navbar */}
         <div className="container-fluid w-100 position-sticky bg-white shadow-sm">
           <div className="row">
@@ -354,7 +354,7 @@ export const DashboardLayout = (props) => {
         </nav>
       </header>
 
-      <div style={{ marginTop: "58px" }} className="container-fluid">
+      <div style={{ marginTop: "58px"  }} className="container-fluid ">
         <div className="row">
           <div className="col-2 d-none-sm"></div>
           <div className="col-12 col-lg-10 ">{props.children}</div>
