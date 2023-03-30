@@ -102,15 +102,16 @@ const DesktopHeader = () => {
     const userData = localStorage.getItem("user");
     if (userData) {
       const user = JSON.parse(userData);
-      if (user && user.lastName) {
-        setUserName(user.lastName);
+      if (user) {
+        let name = user.lastName ? user.lastName : user.firstName;
+        setUserName(name);
       }
     }
   }, [userName]);
 
   const onClickPopupBtn = (route) => {
-    setErrorModal(false)
-    router.push(route)
+    setErrorModal(false);
+    router.push(route);
   };
 
   function logout() {
@@ -135,7 +136,7 @@ const DesktopHeader = () => {
           </div>
           <div className="col-8">
             <div className="row">
-               <div className="col-2 text-center">
+              <div className="col-2 text-center">
                 {/* <Link to={"/"} className="text-decoration-none font-17">
                   who are we?
                 </Link> */}
@@ -153,7 +154,7 @@ const DesktopHeader = () => {
                   my dashboard
                 </a>
               </div>
-             
+
               <div className="col-2 text-center">
                 {/* <Link to={"/signin"} className="text-decoration-none font-17">login/signup</Link> */}
                 {userName ? (
@@ -295,7 +296,7 @@ const DesktopHeader = () => {
           Oops!
         </h3>
         <div className="text-center">
-          <img src={require("../assets/img/must.png")} width="150px"/>
+          <img src={require("../assets/img/must.png")} width="150px" />
         </div>
         <h3 className="weight-700 my-2 font-outfit modal-heading text-center text-purple weight-500 mb-5">
           To use this page you must be signed in!
